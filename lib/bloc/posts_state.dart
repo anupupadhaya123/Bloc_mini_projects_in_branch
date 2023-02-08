@@ -1,4 +1,4 @@
-import 'package:pull_refresh/post.dart';
+import 'package:pull_refresh/model/post.dart';
 
 abstract class PostsState {}
 

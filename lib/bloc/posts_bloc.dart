@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pull_refresh/data_services.dart';
-import 'package:pull_refresh/posts_event.dart';
-import 'package:pull_refresh/posts_state.dart';
+import 'package:pull_refresh/services/data_services.dart';
+import 'package:pull_refresh/bloc/posts_event.dart';
+import 'package:pull_refresh/bloc/posts_state.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
   final _dataServices = DataService();

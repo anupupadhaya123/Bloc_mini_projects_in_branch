@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pull_refresh/post.dart';
-import 'package:pull_refresh/posts_bloc.dart';
-import 'package:pull_refresh/posts_event.dart';
+import 'package:pull_refresh/model/post.dart';
+import 'package:pull_refresh/bloc/posts_bloc.dart';
+import 'package:pull_refresh/bloc/posts_event.dart';
 
-import 'package:pull_refresh/posts_state.dart';
+import 'package:pull_refresh/bloc/posts_state.dart';
 
 class PostVIew extends StatelessWidget {
   const PostVIew({

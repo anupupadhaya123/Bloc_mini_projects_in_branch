@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pull_refresh/post_view.dart';
-import 'package:pull_refresh/posts_bloc.dart';
-import 'package:pull_refresh/posts_event.dart';
+import 'package:pull_refresh/view/post_view.dart';
+import 'package:pull_refresh/bloc/posts_bloc.dart';
+import 'package:pull_refresh/bloc/posts_event.dart';
 
 void main() {
   runApp(const MyApp());

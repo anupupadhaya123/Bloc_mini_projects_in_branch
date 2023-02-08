@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:pull_refresh/post.dart';
+import 'package:pull_refresh/model/post.dart';
 import 'package:http/http.dart' as http;
 
 class DataService {
