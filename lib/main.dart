@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pull_refresh/view/post_view.dart';
-import 'package:pull_refresh/bloc/posts_bloc.dart';
-import 'package:pull_refresh/bloc/posts_event.dart';
+import 'package:pull_refresh/cubit/posts_cubit.dart';
+import 'package:pull_refresh/data/repository/posts_repo.dart';
+import 'package:pull_refresh/data/services/posts_service.dart';
+import 'package:pull_refresh/presentation/posts_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(PaginationApp(
+    repository: PostsRepository(PostService()),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class PaginationApp extends StatelessWidget {
+  final PostsRepository repository;
 
+  const PaginationApp({super.key, required this.repository});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: BlocProvider<PostsBloc>(
-        create: (context) => PostsBloc()..add(LoadEvent()),
-        child: const PostVIew(),
+      home: BlocProvider(
+        create: (context) => PostsCubit(repository),
+        child: PostsScreen(),
       ),
     );
   }
