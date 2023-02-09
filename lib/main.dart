@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pull_refresh/routes/routes_generator.dart';
+import 'package:pull_refresh/presentation/routes/routes_generator.dart';
 
 void main() {
   runApp(const MyApp());
