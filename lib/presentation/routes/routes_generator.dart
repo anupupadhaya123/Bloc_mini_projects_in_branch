@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pull_refresh/business_logic/cubit/age_calculator_cubit.dart';
+import 'package:pull_refresh/business_logic/cubit/sample_cubit.dart';
 import 'package:pull_refresh/presentation/screens/ui/home_page.dart';
 
 class RouteGenerator {
@@ -11,7 +11,7 @@ class RouteGenerator {
       case '/':
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => AgeCalculatorCubit(),
+            create: (context) => SampleCubit(),
             child: const HomePage(title: "Flutter Bloc"),
           ),
         );
