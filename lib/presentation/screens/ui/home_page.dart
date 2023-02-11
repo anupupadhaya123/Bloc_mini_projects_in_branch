@@ -36,41 +36,75 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: BlocConsumer<AgeCalculatorCubit, AgeCalculator>(
+          listener: (context, state) {
+            if (state is AgeCalculatorError) {
+              buildErrorLayout();
+            }
+          },
+          builder: (context, state) {
+            if (state is AgeCalculatorLoading) {
+              return buildLoading();
+            } else if (state is AgeCalculatorLoaded) {
+              return buildLoadedInput(state.stageOfLife);
+            } else {
+              return buildInitialInput();
+            }
+          },
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              BlocBuilder<AgeCalculatorCubit, AgeCalculatorInitial>(
-                builder: (context, state) {
-                  return TextData(message: state.stageOfLife);
-                },
-              ),
-              const HeightSpacer(myHeight: 20),
-              InputField(
-                focusNode: calculateBtnFocusNode,
-                ageController: ageController,
-              ),
-              const HeightSpacer(myHeight: 20),
-              ButtonWidget(
-                  calculateBtnFocusNode: calculateBtnFocusNode,
-                  ageController: ageController)
-            ],
-          ),
-        ));
-  }
-
-  Widget buildBtn(Function myTap, String text) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-        onPressed: () {
-          myTap();
-        },
-        child: Text(text),
       ),
     );
   }
+
+  Widget buildInitialInput() => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const TextData(message: ":)"),
+          const HeightSpacer(myHeight: 20),
+          InputField(
+            focusNode: calculateBtnFocusNode,
+            ageController: ageController,
+          ),
+          const HeightSpacer(myHeight: 10),
+          ButtonWidget(
+            focusNode: calculateBtnFocusNode,
+            ageController: ageController,
+          ),
+        ],
+      );
+
+  Widget buildLoading() =>
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
+        CircularProgressIndicator(),
+        WidthSpacer(myWidth: 25.50),
+        Text("Loading..."),
+      ]);
+
+  Widget buildLoadedInput(String data) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextData(message: data),
+          const HeightSpacer(myHeight: 20),
+          InputField(
+            focusNode: calculateBtnFocusNode,
+            ageController: ageController,
+          ),
+          const HeightSpacer(myHeight: 10),
+          ButtonWidget(
+            focusNode: calculateBtnFocusNode,
+            ageController: ageController,
+          ),
+        ],
+      );
+
+  ScaffoldFeatureController buildErrorLayout() =>
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please enter your age!'),
+        ),
+      );
 }
