@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pull_refresh/business_logic/cubit/login_cubit.dart';
+import 'package:pull_refresh/presentation/components/loader.dart';
 
 import '../../../Components/image_builder.dart';
 import '../../../Components/spacers.dart';
@@ -50,7 +53,22 @@ class _MyHomePageState extends State<MyHomePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: buildInitialInput(),
+        body: BlocConsumer<LoginCubit, LoginState>(builder: (context, state) {
+          if (state is LoginLoaded) {
+            return LoadingWidget(child: buildInitialInput());
+          } else {
+            return buildInitialInput();
+          }
+        }, listener: (context, state) {
+          if (state is LoginError) {
+            buildErrorLayout();
+          } else if (state is LoginLoaded) {
+            Future.delayed(const Duration(seconds: 3), () {
+              Navigator.of(context)
+                  .pushNamed('/dashboard', arguments: state.name);
+            });
+          }
+        }),
       ),
     );
   }

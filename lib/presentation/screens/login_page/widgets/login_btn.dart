@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pull_refresh/business_logic/cubit/login_cubit.dart';
 
 import '../../../Declarations/Constants/constants.dart';
 
@@ -24,7 +26,10 @@ class LoginBtn extends StatelessWidget {
             side: const BorderSide(color: Colors.blue, width: 1),
             minimumSize: const Size(double.infinity, 54),
             backgroundColor: Colors.blue[50]),
-        onPressed: () {},
+        onPressed: () {
+          BlocProvider.of<LoginCubit>(context)
+              .updateData(userName.text, password.text);
+        },
         child: const Text(
           'Login',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_refresh/Presentation/components/spacers.dart';
-
-import '../../../Components/loader.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key, required this.title, required this.username})
@@ -17,7 +14,7 @@ class Dashboard extends StatelessWidget {
         appBar: AppBar(
           title: Text(title),
         ),
-        body: const Center());
+        body: initialLayout(context));
   }
 
   Widget initialLayout(BuildContext context) => Center(
@@ -27,7 +24,7 @@ class Dashboard extends StatelessWidget {
           children: [
             Text(
               "hai $username!",
-              style: const TextStyle(fontSize: 50.00),
+              style: const TextStyle(fontSize: 50.00, color: Colors.black),
             ),
             const HeightSpacer(myHeight: 10.00),
             ElevatedButton(onPressed: () {}, child: const Text("Back"))
