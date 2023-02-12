@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pull_refresh/business_logic/cubit/login_cubit.dart';
+import 'package:pull_refresh/business_logic/bloc/login_auth/bloc/auth_bloc.dart';
 import 'package:pull_refresh/presentation/components/loader.dart';
 
 import '../../../Components/image_builder.dart';
@@ -52,24 +52,22 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: BlocConsumer<LoginCubit, LoginState>(builder: (context, state) {
-          if (state is LoginLoaded) {
-            return LoadingWidget(child: buildInitialInput());
-          } else {
-            return buildInitialInput();
-          }
-        }, listener: (context, state) {
-          if (state is LoginError) {
-            buildErrorLayout();
-          } else if (state is LoginLoaded) {
-            Future.delayed(const Duration(seconds: 3), () {
+          backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
+          body: BlocConsumer<AuthBloc, AuthState>(builder: (context, state) {
+            if (state is AuthLoading) {
+              return LoadingWidget(child: buildInitialInput());
+            } else {
+              return buildInitialInput();
+            }
+          }, listener: (context, state) {
+            if (state is AuthError) {
+              buildErrorLayout();
+            } else if (state is AuthLoaded) {
+              clearTextData();
               Navigator.of(context)
-                  .pushNamed('/dashboard', arguments: state.name);
-            });
-          }
-        }),
-      ),
+                  .pushNamed('/dashboard', arguments: state.username);
+            }
+          })),
     );
   }
 
