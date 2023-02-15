@@ -16,7 +16,7 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState> {
       if (event is LoadData) {
         emit(HomepageLoading());
         await Future.delayed(const Duration(seconds: 2), () async {
-          data = await homePageRepo.fetchDetails();
+          data = (await homePageRepo.fetchDetails()).cast<HomepageModel>();
           emit(HomepageLoaded(data));
         });
       } else if (event is NavBack) {
