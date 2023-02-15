@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../API/api.dart';
-import '../Models/homepage_model.dart';
+import '../models/homepage_model.dart';
 
 abstract class HomePageRepository {
   Future<List<HomepageModel>> fetchDetails();
