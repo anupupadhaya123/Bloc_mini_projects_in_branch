@@ -27,7 +27,7 @@ class Dashboard extends StatelessWidget {
             if (state is DashboardLoading) {
               return LoadingWidget(child: initialLayout(context));
             } else {
-              return initialLayout(context);
+              return initialLayout(context)aas;
             }
           },
         ));
